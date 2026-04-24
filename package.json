@@ -1,0 +1,21 @@
+{
+  "name": "booktracker",
+  "version": "1.0.0",
+  "description": "Personal library management with file-based storage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "books",
+    "library",
+    "reading",
+    "tracker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

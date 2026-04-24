@@ -1,6 +1,6 @@
 # 📚 BookTracker
 
-A modern, fast, and privacy-focused personal library management application. Track your reading progress, organize your book collection, and discover insights about your reading habits — all stored locally in your browser.
+A modern, fast, and privacy-focused personal library management application. Track your reading progress, organize your book collection, and discover insights about your reading habits — all stored locally in JSON files with auto-downloaded cover images.
 
 ![BookTracker Screenshot](screenshot.png)
 
@@ -12,42 +12,39 @@ A modern, fast, and privacy-focused personal library management application. Tra
 - **⭐ Rating System**: Rate books with a 5-star rating system
 - **📈 Reading Statistics**: Track total books, pages read, books completed this year, and average rating
 - **📝 Personal Notes**: Add notes, thoughts, and favorite quotes for each book
-- **🖼️ Cover Images**: Add book covers via URL for visual organization
+- **🖼️ Auto-Downloaded Covers**: Paste a cover URL — the app downloads and stores it locally, no broken images ever
 - **📅 Date Tracking**: Record start and end dates for reading sessions
 - **🌙 Dark Theme**: Beautiful dark UI with modern design aesthetics
 - **📱 Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- **💾 Local Storage**: All data stored locally using IndexedDB — no server, no account required
+- **💾 File-Based Storage**: All data stored in local JSON files (`data/books.json`) — you own your data, can version control it, and never lose it
 - **⌨️ Keyboard Shortcuts**: `Ctrl+N` to add a new book, `Esc` to close modals
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
+- [Node.js](https://nodejs.org/) 14+ installed on your machine
 - A modern web browser (Chrome, Firefox, Safari, Edge)
-- No server or build process required — pure client-side application
 
 ### Installation
 
 1. Clone or download this repository:
    ```bash
    git clone https://github.com/yourusername/booktracker.git
+   cd booktracker
    ```
 
-2. Open `index.html` in your browser:
-   - Double-click the file, or
-   - Use a local development server (recommended):
-     ```bash
-     # Python 3
-     python -m http.server 8000
-     
-     # Node.js
-     npx serve
-     
-     # PHP
-     php -S localhost:8000
-     ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-3. Visit `http://localhost:8000` in your browser
+3. Start the server:
+   ```bash
+   npm start
+   ```
+
+4. Visit `http://localhost:3000` in your browser
 
 ### Quick Start
 
@@ -64,11 +61,17 @@ BookTracker follows a **modular JavaScript architecture** with clear separation 
 
 ```
 js/
-├── db.js      # IndexedDB wrapper — all data persistence
+├── db.js      # HTTP API client — talks to Node.js server
 ├── state.js   # In-memory state management — filters, search, sort
 ├── ui.js      # DOM rendering — cards, stats, modals
 ├── modals.js  # Modal handling — forms, detail view
 └── app.js     # Event wiring, business logic, initialization
+
+server.js       # Express server with file persistence
+data/
+└── books.json  # Your library data (auto-created)
+covers/
+└── *.jpg/png   # Downloaded cover images (auto-created)
 ```
 
 ### Data Model
@@ -86,9 +89,10 @@ Each book contains:
 
 ### Storage
 
-- **IndexedDB** (`BookTrackerDB` v1) — Persistent browser storage
-- **Object Store**: `books` with indexes on `status` and `createdAt`
-- All data stays on your device — complete privacy
+- **JSON File** (`data/books.json`) — Human-readable, version-controllable
+- **Local Images** (`covers/` folder) — Auto-downloaded, always available offline
+- **Node.js Server** — Handles file I/O and image downloads
+- All data stays on your machine — complete privacy
 
 ## 🎨 Design System
 
@@ -120,15 +124,21 @@ Each book contains:
 
 ```
 book_tracker/
+├── server.js           # Node.js Express server
+├── package.json        # Dependencies and scripts
 ├── index.html          # Main application entry
 ├── css/
 │   └── styles.css      # All styles (1000+ lines)
 ├── js/
-│   ├── db.js           # IndexedDB operations
+│   ├── db.js           # HTTP API client
 │   ├── state.js        # State management
 │   ├── ui.js           # UI rendering
 │   ├── modals.js       # Modal controls
 │   └── app.js          # App initialization & events
+├── data/               # Created automatically
+│   └── books.json      # Your library data
+├── covers/             # Created automatically
+│   └── *.jpg/png       # Downloaded book covers
 └── README.md           # This file
 ```
 
@@ -182,7 +192,7 @@ All CSS uses CSS custom properties (variables) at the top of `css/styles.css`:
 - Safari 12+
 - Edge 79+
 
-Requires IndexedDB support (all modern browsers).
+Requires Node.js server to be running for file storage.
 
 ## 📝 License
 
@@ -193,15 +203,15 @@ MIT License — free to use, modify, and distribute.
 Contributions welcome! Areas for improvement:
 - Export/Import functionality
 - Reading goal tracking
-- Book cover image upload (currently URL-only)
+- Direct image file upload (drag & drop from computer)
 - Reading session timer
 - Multi-language support
 
 ## 🐛 Known Issues
 
-- Cover images rely on external URLs — broken links show placeholder
 - No sync between devices (by design — privacy-focused)
 - Large libraries (>1000 books) may experience performance degradation
+- Requires Node.js server running (not a static site anymore)
 
 ---
 

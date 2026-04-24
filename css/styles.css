@@ -95,7 +95,9 @@ body {
 }
 
 .logo-icon {
-    font-size: 1.6rem;
+    width: 28px;
+    height: 28px;
+    color: var(--accent);
 }
 
 .logo h1 {
@@ -142,9 +144,9 @@ body {
 }
 
 .nav-icon {
-    font-size: 1.1rem;
-    width: 24px;
-    text-align: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 .nav-text {
@@ -233,9 +235,15 @@ body {
     background: none;
     border: none;
     color: var(--text-primary);
-    font-size: 1.4rem;
     cursor: pointer;
     padding: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-toggle svg {
+    width: 24px;
+    height: 24px;
 }
 
 .header-title {
@@ -269,8 +277,9 @@ body {
 }
 
 .search-icon {
-    font-size: 0.85rem;
-    margin-right: 6px;
+    margin-right: 8px;
+    color: var(--text-muted);
+    flex-shrink: 0;
 }
 
 .search-box input {
@@ -391,7 +400,8 @@ body {
 }
 
 .book-cover-placeholder {
-    font-size: 3rem;
+    width: 64px;
+    height: 64px;
     opacity: 0.3;
 }
 
@@ -446,6 +456,7 @@ body {
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -475,8 +486,14 @@ body {
 
 .book-rating {
     color: var(--yellow);
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.book-rating svg {
+    width: 14px;
+    height: 14px;
 }
 
 .book-card-actions {
@@ -503,10 +520,16 @@ body {
     border-color: rgba(108, 99, 255, 0.2);
 }
 
-.card-action-btn.delete:hover {
+.card-action-btn.delete {
     background: var(--red-bg);
     color: var(--red);
-    border-color: rgba(248, 113, 113, 0.2);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.card-action-btn.delete:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
 }
 
 /* ===== EMPTY STATE ===== */
@@ -516,9 +539,10 @@ body {
 }
 
 .empty-icon {
-    font-size: 4rem;
+    width: 80px;
+    height: 80px;
     display: block;
-    margin-bottom: 16px;
+    margin: 0 auto 16px;
     opacity: 0.4;
 }
 
@@ -666,11 +690,17 @@ body {
 }
 
 .rating-input .star {
-    font-size: 1.6rem;
     color: var(--border);
     cursor: pointer;
     transition: all 0.15s ease;
     user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.rating-input .star svg {
+    width: 28px;
+    height: 28px;
 }
 
 .rating-input .star:hover,
@@ -810,8 +840,14 @@ body {
 
 .detail-rating {
     color: var(--yellow);
-    font-size: 1.1rem;
-    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.detail-rating svg {
+    width: 18px;
+    height: 18px;
 }
 
 .detail-notes {
@@ -874,12 +910,15 @@ body {
 
 .detail-btn.delete {
     margin-left: auto;
-}
-
-.detail-btn.delete:hover {
     background: var(--red-bg);
     color: var(--red);
     border-color: rgba(248, 113, 113, 0.3);
+}
+
+.detail-btn.delete:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
 }
 
 /* ===== TOAST ===== */
@@ -903,9 +942,21 @@ body {
     box-shadow: var(--shadow-md);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     animation: toastIn 0.3s ease, toastOut 0.3s ease 2.7s forwards;
     max-width: 320px;
+}
+
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.toast-icon svg {
+    width: 18px;
+    height: 18px;
 }
 
 .toast.success {

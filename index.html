@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚 BookTracker</title>
+    <title>BookTracker</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -11,38 +11,38 @@
     <div class="app">
         <aside class="sidebar">
             <div class="logo">
-                <span class="logo-icon">📚</span>
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                 <h1>BookTracker</h1>
             </div>
             <nav class="nav">
                 <button class="nav-btn active" data-filter="all">
-                    <span class="nav-icon">📖</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                     <span class="nav-text">All Books</span>
                     <span class="nav-count" id="count-all">0</span>
                 </button>
                 <button class="nav-btn" data-filter="reading">
-                    <span class="nav-icon">👀</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                     <span class="nav-text">Reading</span>
                     <span class="nav-count" id="count-reading">0</span>
                 </button>
                 <button class="nav-btn" data-filter="completed">
-                    <span class="nav-icon">✅</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                     <span class="nav-text">Completed</span>
                     <span class="nav-count" id="count-completed">0</span>
                 </button>
                 <button class="nav-btn" data-filter="planned">
-                    <span class="nav-icon">📋</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
                     <span class="nav-text">Planned</span>
                     <span class="nav-count" id="count-planned">0</span>
                 </button>
                 <button class="nav-btn" data-filter="dropped">
-                    <span class="nav-icon">💤</span>
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path><path d="M19 5v14"></path></svg>
                     <span class="nav-text">Dropped</span>
                     <span class="nav-count" id="count-dropped">0</span>
                 </button>
             </nav>
             <div class="sidebar-stats">
-                <h3>📊 Stats</h3>
+                <h3>Stats</h3>
                 <div class="stat-item">
                     <span>Total Books</span>
                     <strong id="stat-total">0</strong>
@@ -65,7 +65,7 @@
         <main class="main">
             <header class="header">
                 <div class="header-left">
-                    <button class="menu-toggle" id="menuToggle">☰</button>
+                    <button class="menu-toggle" id="menuToggle"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
                     <div>
                         <h2 class="header-title" id="headerTitle">All Books</h2>
                         <p class="header-sub" id="headerSub">Your complete library</p>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="header-right">
                     <div class="search-box">
-                        <span class="search-icon">🔍</span>
+                        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
                         <input type="text" id="searchInput" placeholder="Search books..." autocomplete="off">
                     </div>
                     <select id="sortSelect" class="sort-select">
@@ -93,7 +93,7 @@
             <div class="books-container">
                 <div class="books-grid" id="booksGrid"></div>
                 <div class="empty-state" id="emptyState" style="display:none;">
-                    <span class="empty-icon">📚</span>
+                    <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                     <h3>No books here yet</h3>
                     <p>Start building your library by adding your first book!</p>
                     <button class="btn-add" id="btnAddEmpty"><span>+</span> Add Your First Book</button>
@@ -152,10 +152,10 @@
                     <div class="form-group">
                         <label for="bookStatus">Status *</label>
                         <select id="bookStatus" required>
-                            <option value="planned">📋 Planned</option>
-                            <option value="reading">👀 Reading</option>
-                            <option value="completed">✅ Completed</option>
-                            <option value="dropped">💤 Dropped</option>
+                            <option value="planned">Planned</option>
+                            <option value="reading">Reading</option>
+                            <option value="completed">Completed</option>
+                            <option value="dropped">Dropped</option>
                         </select>
                     </div>
                 </div>
@@ -172,11 +172,11 @@
                 <div class="form-group">
                     <label>Rating</label>
                     <div class="rating-input" id="ratingInput">
-                        <span class="star" data-value="1">★</span>
-                        <span class="star" data-value="2">★</span>
-                        <span class="star" data-value="3">★</span>
-                        <span class="star" data-value="4">★</span>
-                        <span class="star" data-value="5">★</span>
+                        <span class="star" data-value="1"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+                        <span class="star" data-value="2"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+                        <span class="star" data-value="3"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+                        <span class="star" data-value="4"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+                        <span class="star" data-value="5"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
                         <button type="button" class="rating-clear" id="ratingClear">Clear</button>
                     </div>
                     <input type="hidden" id="bookRating" value="0">

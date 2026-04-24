@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "genre": "History",
+    "pages": 443,
+    "status": "reading",
+    "rating": 0,
+    "startDate": "2025-01-15",
+    "cover": "/covers/modawxyup8jtlj.jpg",
+    "id": "modawxyup8jtlj",
+    "createdAt": "2026-04-24T19:26:19.638Z",
+    "updatedAt": "2026-04-24T19:26:19.638Z"
+  },
+  {
+    "title": "The Way of Kings",
+    "author": "Brandon Sanderson",
+    "genre": "Fantasy",
+    "pages": 1007,
+    "status": "reading",
+    "rating": 0,
+    "startDate": "2025-01-05",
+    "cover": "/covers/modawwcwmkg9li.jpg",
+    "notes": "Currently on chapter 40. The magic system is incredible.",
+    "id": "modawwcwmkg9li",
+    "createdAt": "2026-04-24T19:26:17.552Z",
+    "updatedAt": "2026-04-24T19:26:17.552Z"
+  },
+  {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "genre": "Self-Help",
+    "pages": 320,
+    "status": "completed",
+    "rating": 4,
+    "startDate": "2024-04-05",
+    "endDate": "2024-04-18",
+    "cover": "/covers/modawv69o62b3l.jpg",
+    "notes": "Practical and well-written. The 1% improvement concept stuck with me.",
+    "id": "modawv69o62b3l",
+    "createdAt": "2026-04-24T19:26:16.017Z",
+    "updatedAt": "2026-04-24T19:26:16.017Z"
+  }
+]

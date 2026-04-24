@@ -1,123 +1,60 @@
 // =====================================================
-//  db.js — IndexedDB wrapper
+//  db.js — HTTP API wrapper for file-based storage
 //  All database operations live here, nothing else
 //  touches the database directly.
 // =====================================================
 
 const DB = (() => {
-    const DB_NAME    = 'BookTrackerDB';
-    const DB_VERSION = 1;
-    const STORE      = 'books';
+    const API_URL = ''; // Same origin
 
-    let _db = null;
-
-    // Opens (or creates) the database, returns a Promise
-    function open() {
-        return new Promise((resolve, reject) => {
-            if (_db) { resolve(_db); return; }
-
-            const request = indexedDB.open(DB_NAME, DB_VERSION);
-
-            // Runs only when DB is first created or version bumped
-            request.onupgradeneeded = (e) => {
-                const db = e.target.result;
-                if (!db.objectStoreNames.contains(STORE)) {
-                    const store = db.createObjectStore(STORE, { keyPath: 'id' });
-                    store.createIndex('status',    'status',    { unique: false });
-                    store.createIndex('createdAt', 'createdAt', { unique: false });
-                }
-            };
-
-            request.onsuccess = (e) => {
-                _db = e.target.result;
-                resolve(_db);
-            };
-
-            request.onerror = (e) => {
-                console.error('IndexedDB error:', e.target.error);
-                reject(e.target.error);
-            };
-        });
-    }
-
-    // Helper: wraps an IDB request in a Promise
-    function promisify(requestFn) {
-        return open().then(db => new Promise((resolve, reject) => {
-            const request = requestFn(db);
-            request.onsuccess = (e) => resolve(e.target.result);
-            request.onerror   = (e) => reject(e.target.error);
-        }));
-    }
-
-    // Helper: generate a unique ID
-    function generateId() {
-        return Date.now().toString(36) + Math.random().toString(36).substr(2, 6);
+    // Helper: handle API responses
+    async function handleResponse(response) {
+        if (!response.ok) {
+            const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+            throw new Error(error.error || `HTTP ${response.status}`);
+        }
+        if (response.status === 204) {
+            return null;
+        }
+        return response.json();
     }
 
     // ---- Public API ----
 
     function getAll() {
-        return promisify(db =>
-            db.transaction(STORE, 'readonly')
-              .objectStore(STORE)
-              .getAll()
-        );
+        return fetch(`${API_URL}/api/books`).then(handleResponse);
     }
 
     function getById(id) {
-        return promisify(db =>
-            db.transaction(STORE, 'readonly')
-              .objectStore(STORE)
-              .get(id)
-        );
+        return fetch(`${API_URL}/api/books/${id}`).then(handleResponse);
     }
 
     function create(data) {
-        const book = {
-            ...data,
-            id:        generateId(),
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        };
-        return promisify(db =>
-            db.transaction(STORE, 'readwrite')
-              .objectStore(STORE)
-              .add(book)
-        ).then(() => book); // return the full object, not just the key
+        return fetch(`${API_URL}/api/books`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(handleResponse);
     }
 
     function update(id, data) {
-        return getById(id).then(existing => {
-            if (!existing) throw new Error(`Book ${id} not found`);
-            const updated = {
-                ...existing,
-                ...data,
-                id,                          // never overwrite id
-                createdAt: existing.createdAt, // never overwrite createdAt
-                updatedAt: new Date().toISOString()
-            };
-            return promisify(db =>
-                db.transaction(STORE, 'readwrite')
-                  .objectStore(STORE)
-                  .put(updated)
-            ).then(() => updated);
-        });
+        return fetch(`${API_URL}/api/books/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(handleResponse);
     }
 
     function remove(id) {
-        return promisify(db =>
-            db.transaction(STORE, 'readwrite')
-              .objectStore(STORE)
-              .delete(id)
-        );
+        return fetch(`${API_URL}/api/books/${id}`, {
+            method: 'DELETE'
+        }).then(handleResponse);
     }
 
     function count() {
-        return promisify(db =>
-            db.transaction(STORE, 'readonly')
-              .objectStore(STORE)
-              .count()
-        );
+        return fetch(`${API_URL}/api/count`)
+            .then(handleResponse)
+            .then(data => data.count);
     }
 
     // Expose only what the rest of the app needs

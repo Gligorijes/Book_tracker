@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 BookTracker</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <h1>BookTracker</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-filter="all">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">All Books</span>
+                    <span class="nav-count" id="count-all">0</span>
+                </button>
+                <button class="nav-btn" data-filter="reading">
+                    <span class="nav-icon">👀</span>
+                    <span class="nav-text">Reading</span>
+                    <span class="nav-count" id="count-reading">0</span>
+                </button>
+                <button class="nav-btn" data-filter="completed">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Completed</span>
+                    <span class="nav-count" id="count-completed">0</span>
+                </button>
+                <button class="nav-btn" data-filter="planned">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-text">Planned</span>
+                    <span class="nav-count" id="count-planned">0</span>
+                </button>
+                <button class="nav-btn" data-filter="dropped">
+                    <span class="nav-icon">💤</span>
+                    <span class="nav-text">Dropped</span>
+                    <span class="nav-count" id="count-dropped">0</span>
+                </button>
+            </nav>
+            <div class="sidebar-stats">
+                <h3>📊 Stats</h3>
+                <div class="stat-item">
+                    <span>Total Books</span>
+                    <strong id="stat-total">0</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Pages Read</span>
+                    <strong id="stat-pages">0</strong>
+                </div>
+                <div class="stat-item">
+                    <span>This Year</span>
+                    <strong id="stat-year">0</strong>
+                </div>
+                <div class="stat-item">
+                    <span>Avg Rating</span>
+                    <strong id="stat-rating">—</strong>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">☰</button>
+                    <div>
+                        <h2 class="header-title" id="headerTitle">All Books</h2>
+                        <p class="header-sub" id="headerSub">Your complete library</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="searchInput" placeholder="Search books..." autocomplete="off">
+                    </div>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="title">Title A-Z</option>
+                        <option value="title-desc">Title Z-A</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="pages">Most Pages</option>
+                    </select>
+                    <button class="btn-add" id="btnAdd">
+                        <span>+</span> Add Book
+                    </button>
+                </div>
+            </header>
+
+            <div class="books-container">
+                <div class="books-grid" id="booksGrid"></div>
+                <div class="empty-state" id="emptyState" style="display:none;">
+                    <span class="empty-icon">📚</span>
+                    <h3>No books here yet</h3>
+                    <p>Start building your library by adding your first book!</p>
+                    <button class="btn-add" id="btnAddEmpty"><span>+</span> Add Your First Book</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add / Edit Modal -->
+    <div class="modal-overlay" id="bookModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Book</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <form id="bookForm" class="modal-body">
+                <input type="hidden" id="bookId">
+                <div class="form-group">
+                    <label for="bookTitle">Title *</label>
+                    <input type="text" id="bookTitle" required placeholder="Enter book title" autocomplete="off">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookAuthor">Author *</label>
+                        <input type="text" id="bookAuthor" required placeholder="Author name" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookGenre">Genre</label>
+                        <select id="bookGenre">
+                            <option value="">Select genre</option>
+                            <option>Fiction</option>
+                            <option>Non-Fiction</option>
+                            <option>Sci-Fi</option>
+                            <option>Fantasy</option>
+                            <option>Mystery</option>
+                            <option>Thriller</option>
+                            <option>Romance</option>
+                            <option>Horror</option>
+                            <option>Biography</option>
+                            <option>Self-Help</option>
+                            <option>History</option>
+                            <option>Science</option>
+                            <option>Philosophy</option>
+                            <option>Psychology</option>
+                            <option>Poetry</option>
+                            <option>Comics</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookPages">Pages</label>
+                        <input type="number" id="bookPages" placeholder="Number of pages" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookStatus">Status *</label>
+                        <select id="bookStatus" required>
+                            <option value="planned">📋 Planned</option>
+                            <option value="reading">👀 Reading</option>
+                            <option value="completed">✅ Completed</option>
+                            <option value="dropped">💤 Dropped</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookStart">Start Date</label>
+                        <input type="date" id="bookStart">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookEnd">End Date</label>
+                        <input type="date" id="bookEnd">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="rating-input" id="ratingInput">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                        <button type="button" class="rating-clear" id="ratingClear">Clear</button>
+                    </div>
+                    <input type="hidden" id="bookRating" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="bookCover">Cover Image URL</label>
+                    <input type="url" id="bookCover" placeholder="https://example.com/cover.jpg" autocomplete="off">
+                    <small class="form-hint">Paste a link to the book cover image (optional)</small>
+                </div>
+                <div class="form-group">
+                    <label for="bookNotes">Notes</label>
+                    <textarea id="bookNotes" placeholder="Your thoughts, favorite quotes..." rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
+                    <button type="submit" class="btn-save">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal modal-detail">
+            <button class="modal-close" id="detailClose">&times;</button>
+            <div class="detail-content" id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts — ORDER MATTERS -->
+    <script src="js/db.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

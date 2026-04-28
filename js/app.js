@@ -5,6 +5,16 @@
 
 const STATUS_CYCLE = ['planned', 'reading', 'completed', 'dropped'];
 
+function translateStatus(status) {
+    const map = {
+        'planned': 'Planirana',
+        'reading': 'Čitam',
+        'completed': 'Završena',
+        'dropped': 'Odbačena'
+    };
+    return map[status] || status;
+}
+
 // ---- Full re-render ----
 
 function renderAll() {
@@ -22,7 +32,7 @@ async function handleSaveBook(e) {
     const id   = Modals.getEditingId();
 
     if (!data.title || !data.author) {
-        UI.showToast('Please fill in title and author', 'error');
+        UI.showToast('Unesite naslov i autora', 'error');
         return;
     }
 
@@ -30,11 +40,11 @@ async function handleSaveBook(e) {
         if (id) {
             const updated = await DB.update(id, data);
             State.replaceBook(updated);
-            UI.showToast(`"${data.title}" updated!`);
+            UI.showToast(`"${data.title}" ažurirana!`);
         } else {
             const created = await DB.create(data);
             State.addBook(created);
-            UI.showToast(`"${data.title}" added to your library!`);
+            UI.showToast(`"${data.title}" dodata u biblioteku!`);
         }
 
         Modals.closeBookForm();
@@ -42,24 +52,24 @@ async function handleSaveBook(e) {
 
     } catch (err) {
         console.error(err);
-        UI.showToast('Something went wrong. Try again.', 'error');
+        UI.showToast('Greška. Pokušajte ponovo.', 'error');
     }
 }
 
 async function handleDeleteBook(id) {
     const book = State.getBooks().find(b => b.id === id);
     if (!book) return;
-    if (!confirm(`Delete "${book.title}"? This cannot be undone.`)) return;
+    if (!confirm(`Obrisati "${book.title}"? Ova akcija se ne može poništiti.`)) return;
 
     try {
         await DB.remove(id);
         State.removeBook(id);
         Modals.closeDetail();
         renderAll();
-        UI.showToast(`"${book.title}" deleted`, 'info');
+        UI.showToast(`"${book.title}" obrisana`, 'info');
     } catch (err) {
         console.error(err);
-        UI.showToast('Could not delete book.', 'error');
+        UI.showToast('Greška pri brisanju knjige.', 'error');
     }
 }
 
@@ -79,7 +89,7 @@ async function handleCycleStatus(id) {
         const updated = await DB.update(id, updates);
         State.replaceBook(updated);
         renderAll();
-        UI.showToast(`"${book.title}" → ${next}`);
+        UI.showToast(`"${book.title}" → ${translateStatus(next)}`);
 
         // Refresh detail view if it's open for this book
         if (document.getElementById('detailModal').classList.contains('open')) {
@@ -87,7 +97,7 @@ async function handleCycleStatus(id) {
         }
     } catch (err) {
         console.error(err);
-        UI.showToast('Could not update status.', 'error');
+        UI.showToast('Greška pri ažuriranju statusa.', 'error');
     }
 }
 
@@ -214,11 +224,17 @@ function toggleSidebar() {
     sidebarOverlay.classList.toggle('active', sidebar.classList.contains('open'));
 }
 
-// ---- Sample data (only if library is empty) ----
+// ---- Sample data (only on first ever visit) ----
 
 async function seedIfEmpty() {
+    // Only run once per browser - ever
+    if (localStorage.getItem('booktracker-seeded')) return;
+    
     const total = await DB.count();
-    if (total > 0) return;
+    if (total > 0) {
+        localStorage.setItem('booktracker-seeded', 'true');
+        return;
+    }
 
     const samples = [
         {
@@ -268,6 +284,8 @@ async function seedIfEmpty() {
         const book = await DB.create(s);
         State.addBook(book);
     }
+    
+    localStorage.setItem('booktracker-seeded', 'true');
 }
 
 // ---- Boot ----
@@ -284,7 +302,7 @@ async function init() {
 
         renderAll();
     } catch (err) {
-        console.error('Failed to start BookTracker:', err);
+        console.error('Greška pri pokretanju BookTracker-a:', err);
     }
 }
 

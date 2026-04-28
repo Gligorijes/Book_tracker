@@ -1,5 +1,18 @@
 [
   {
+    "title": "Neuromancer",
+    "author": "William Gibson",
+    "genre": "Sci-Fi",
+    "pages": 271,
+    "status": "planned",
+    "rating": 0,
+    "cover": "/covers/moivq3zyij1uzo.jpg",
+    "notes": "Recommended by a friend. Classic cyberpunk.",
+    "id": "moivq3zyij1uzo",
+    "createdAt": "2026-04-28T17:07:43.678Z",
+    "updatedAt": "2026-04-28T17:07:43.678Z"
+  },
+  {
     "title": "Sapiens",
     "author": "Yuval Noah Harari",
     "genre": "History",
@@ -7,10 +20,10 @@
     "status": "reading",
     "rating": 0,
     "startDate": "2025-01-15",
-    "cover": "/covers/modawxyup8jtlj.jpg",
-    "id": "modawxyup8jtlj",
-    "createdAt": "2026-04-24T19:26:19.638Z",
-    "updatedAt": "2026-04-24T19:26:19.638Z"
+    "cover": "/covers/moivq0qv4ccky1.jpg",
+    "id": "moivq0qv4ccky1",
+    "createdAt": "2026-04-28T17:07:39.463Z",
+    "updatedAt": "2026-04-28T17:07:39.463Z"
   },
   {
     "title": "The Way of Kings",
@@ -20,11 +33,11 @@
     "status": "reading",
     "rating": 0,
     "startDate": "2025-01-05",
-    "cover": "/covers/modawwcwmkg9li.jpg",
+    "cover": "https://covers.openlibrary.org/b/id/8550598-L.jpg",
     "notes": "Currently on chapter 40. The magic system is incredible.",
-    "id": "modawwcwmkg9li",
-    "createdAt": "2026-04-24T19:26:17.552Z",
-    "updatedAt": "2026-04-24T19:26:17.552Z"
+    "id": "moivphvj6332ew",
+    "createdAt": "2026-04-28T17:07:15.007Z",
+    "updatedAt": "2026-04-28T17:07:15.007Z"
   },
   {
     "title": "Atomic Habits",
@@ -35,10 +48,40 @@
     "rating": 4,
     "startDate": "2024-04-05",
     "endDate": "2024-04-18",
-    "cover": "/covers/modawv69o62b3l.jpg",
+    "cover": "https://covers.openlibrary.org/b/id/12645114-L.jpg",
     "notes": "Practical and well-written. The 1% improvement concept stuck with me.",
-    "id": "modawv69o62b3l",
-    "createdAt": "2026-04-24T19:26:16.017Z",
-    "updatedAt": "2026-04-24T19:26:16.017Z"
+    "id": "moivph0u77y3bg",
+    "createdAt": "2026-04-28T17:07:13.902Z",
+    "updatedAt": "2026-04-28T17:07:13.902Z"
+  },
+  {
+    "title": "Project Hail Mary",
+    "author": "Andy Weir",
+    "genre": "Sci-Fi",
+    "pages": 496,
+    "status": "completed",
+    "rating": 5,
+    "startDate": "2024-03-01",
+    "endDate": "2024-03-20",
+    "cover": "/covers/moivpc9krgc6zz.jpg",
+    "notes": "Fun, gripping, and surprisingly emotional.",
+    "id": "moivpc9krgc6zz",
+    "createdAt": "2026-04-28T17:07:07.736Z",
+    "updatedAt": "2026-04-28T17:07:07.736Z"
+  },
+  {
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": "Sci-Fi",
+    "pages": 688,
+    "status": "completed",
+    "rating": 5,
+    "startDate": "2024-01-10",
+    "endDate": "2024-02-15",
+    "cover": "/covers/moivpacfahc5bf.jpg",
+    "notes": "An absolute masterpiece. The world-building is unparalleled.",
+    "id": "moivpacfahc5bf",
+    "createdAt": "2026-04-28T17:07:05.247Z",
+    "updatedAt": "2026-04-28T17:07:05.247Z"
   }
 ]
